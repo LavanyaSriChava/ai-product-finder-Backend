@@ -3,7 +3,6 @@ package com.lavanya.aiproductfinder.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
-
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -15,14 +14,16 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration =
+        CorsConfiguration config =
                 new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
+        config.setAllowedOrigins(
+                List.of(
+                        "https://ai-product-finder-frontend.vercel.app"
+                )
         );
 
-        configuration.setAllowedMethods(
+        config.setAllowedMethods(
                 List.of(
                         "GET",
                         "POST",
@@ -32,18 +33,18 @@ public class CorsConfig {
                 )
         );
 
-        configuration.setAllowedHeaders(
+        config.setAllowedHeaders(
                 List.of("*")
         );
 
-        configuration.setAllowCredentials(true);
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
         source.registerCorsConfiguration(
                 "/**",
-                configuration
+                config
         );
 
         return source;
