@@ -19,7 +19,11 @@ public class SearchHistoryController {
 
         this.searchHistoryService = searchHistoryService;
     }
+    @GetMapping("/test")
+    public String test(Authentication authentication) {
 
+        return authentication.getName();
+    }
     @GetMapping
     public ResponseEntity<List<SearchHistory>>
     getCurrentUserHistory(

@@ -44,12 +44,16 @@ public class AiRecommendationController {
             @RequestBody AiSearchRequest request,
             Authentication authentication) {
 
-        String email = authentication.getName();
+        if (authentication != null) {
 
-        searchHistoryService.saveSearch(
-                email,
-                request.getQuery()
-        );
+            String email =
+                    authentication.getName();
+
+            searchHistoryService.saveSearch(
+                    email,
+                    request.getQuery()
+            );
+        }
 
         String recommendation =
                 aiRecommendationService
