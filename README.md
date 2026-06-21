@@ -7,7 +7,7 @@ AI Product Finder Backend is a Spring Boot REST API that powers the AI Product F
 # 🔗 Project Links
 
 ### 🌐 Live Application
-https://ai-product-finder-frontend-mzy8h6v0e-lavs.vercel.app/
+https://ai-product-finder-frontend.vercel.app/wishlist
 
 ### 💻 Frontend Repository
 https://github.com/LavanyaSriChava/ai-product-finder-frontend
