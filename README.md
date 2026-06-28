@@ -28,26 +28,26 @@ https://github.com/LavanyaSriChava/ai-product-finder-Backend
 ## ⚖️ Product Comparison
 - Compare two products using AI
 - Feature-by-feature comparison
-- Recommendation verdict generation
+- AI-generated recommendation verdict
 
 ## 🔐 Authentication & Authorization
 - User Registration
 - User Login
 - JWT Authentication
 - Stateless Security
-- Role-Based Access Control
+- Role-Based Access Control (User/Admin)
 
 ## ❤️ Wishlist Management
 - Add products to wishlist
 - Remove products from wishlist
 - View saved wishlist items
-- User-specific data management
+- User-specific wishlist management
 
 ## 📜 Search History
 - Automatically stores searches for authenticated users
 - View previous searches
 - Delete individual searches
-- Clear complete history
+- Clear complete search history
 
 ## 👨‍💼 Admin Dashboard
 - Admin-only access
@@ -55,19 +55,25 @@ https://github.com/LavanyaSriChava/ai-product-finder-Backend
 - Search analytics
 - User insights
 
+## 🐳 Containerization
+- Multi-stage Docker build
+- Docker Compose orchestration
+- Containerized Spring Boot backend
+- Containerized PostgreSQL database
+
 ## 🛡️ Security Features
 - Spring Security
 - JWT Token Validation
+- BCrypt Password Encryption
 - Protected API Endpoints
-- Secure Password Encryption using BCrypt
 
 ---
 
 # 🏗️ Tech Stack
 
 ## Backend Framework
-- Java 21
-- Spring Boot 3
+- Java
+- Spring Boot
 - Spring MVC
 
 ## Security
@@ -87,10 +93,15 @@ https://github.com/LavanyaSriChava/ai-product-finder-Backend
 ## API Development
 - RESTful APIs
 - DTO Pattern
-- Exception Handling
+- Global Exception Handling
 
-## Documentation
-- Swagger/OpenAPI
+## API Documentation
+- Swagger / OpenAPI
+- JWT Authorization support in Swagger UI
+
+## DevOps
+- Docker
+- Docker Compose
 
 ## Build Tool
 - Maven
@@ -143,7 +154,7 @@ POST /api/auth/register
 POST /api/auth/login
 ```
 
-## AI Search
+## AI
 
 ```http
 POST /api/ai/search
@@ -170,6 +181,57 @@ DELETE /api/search-history/clear
 
 ```http
 GET /api/admin/dashboard
+```
+
+---
+
+# 📖 API Documentation
+
+Swagger UI is available after running the application:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+The API documentation supports JWT Bearer Authentication for testing protected endpoints.
+
+---
+
+# 🐳 Running with Docker
+
+## Prerequisites
+
+- Docker Desktop
+
+## Build and Start
+
+```bash
+docker compose up --build
+```
+
+This command starts:
+
+- Spring Boot Backend
+- PostgreSQL Database
+
+The backend automatically connects to PostgreSQL through Docker Compose's internal network.
+
+## Stop Containers
+
+```bash
+docker compose down
+```
+
+Backend URL
+
+```
+http://localhost:8080
+```
+
+Swagger UI
+
+```
+http://localhost:8080/swagger-ui/index.html
 ```
 
 ---
