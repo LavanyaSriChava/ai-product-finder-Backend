@@ -1,18 +1,23 @@
-# 🚀 AI Product Finder Backend
+# 🚀 AI Product Finder
 
-AI Product Finder Backend is a Spring Boot REST API that powers the AI Product Finder platform. It provides AI-powered product recommendations, authentication, wishlist management, search history tracking, product comparison, and admin analytics.
+AI Product Finder is a full-stack AI-powered product recommendation platform that allows users to search for products using natural language, compare products using AI, manage wishlists, track search history, and access personalized features through secure authentication.
+
+The application is built using **React, Spring Boot, PostgreSQL, Spring Security, JWT, OpenRouter AI, Docker, Nginx, and AWS EC2** and is deployed as a production-ready containerized application on AWS.
 
 ---
 
 # 🔗 Project Links
 
 ### 🌐 Live Application
-https://ai-product-finder-frontend.vercel.app
+
+https://13.205.5.209/
 
 ### 💻 Frontend Repository
+
 https://github.com/LavanyaSriChava/ai-product-finder-frontend
 
 ### ⚙️ Backend Repository
+
 https://github.com/LavanyaSriChava/ai-product-finder-Backend
 
 ---
@@ -20,101 +25,215 @@ https://github.com/LavanyaSriChava/ai-product-finder-Backend
 # ✨ Features
 
 ## 🤖 AI Product Recommendation
-- Public AI-powered product search
-- Natural language query support
-- OpenRouter AI integration
-- Smart product recommendations
 
-## ⚖️ Product Comparison
-- Compare two products using AI
+- AI-powered product search using natural language
+- Personalized product recommendations
+- OpenRouter API integration
+- LLM-generated product specifications and recommendations
+- Public product search support
+
+## ⚖️ AI Product Comparison
+
+- Compare products using AI
 - Feature-by-feature comparison
+- Analyze specifications and use cases
 - AI-generated recommendation verdict
 
 ## 🔐 Authentication & Authorization
-- User Registration
-- User Login
-- JWT Authentication
-- Stateless Security
-- Role-Based Access Control (User/Admin)
+
+- User registration
+- User login
+- JWT-based authentication
+- Stateless Spring Security
+- Role-Based Access Control (RBAC)
+- User and Admin roles
+- BCrypt password hashing
 
 ## ❤️ Wishlist Management
+
 - Add products to wishlist
 - Remove products from wishlist
-- View saved wishlist items
-- User-specific wishlist management
+- View saved products
+- User-specific wishlist persistence
 
 ## 📜 Search History
+
 - Automatically stores searches for authenticated users
 - View previous searches
-- Delete individual searches
+- Delete individual search records
 - Clear complete search history
 
 ## 👨‍💼 Admin Dashboard
-- Admin-only access
+
+- Admin-only protected routes
 - Platform monitoring
 - Search analytics
 - User insights
 
-## 🐳 Containerization
-- Multi-stage Docker build
-- Docker Compose orchestration
-- Containerized Spring Boot backend
-- Containerized PostgreSQL database
+## 📖 API Documentation
 
-## 🛡️ Security Features
-- Spring Security
-- JWT Token Validation
-- BCrypt Password Encryption
-- Protected API Endpoints
+- Swagger / OpenAPI documentation
+- Interactive REST API testing
+- JWT Bearer Authentication support
+
+## 🐳 Containerization
+
+- Multi-stage Docker build
+- Dockerized Spring Boot application
+- Dockerized PostgreSQL database
+- Docker Compose orchestration
+- Persistent PostgreSQL volume
+- Automatic container restart policy
 
 ---
 
 # 🏗️ Tech Stack
 
-## Backend Framework
-- Java
+## Frontend
+
+- React.js
+- React Router
+- Axios
+- Tailwind CSS
+- Vite
+
+## Backend
+
+- Java 17
 - Spring Boot
 - Spring MVC
+- Spring Data JPA
+- Hibernate
 
 ## Security
+
 - Spring Security
 - JWT Authentication
 - BCrypt Password Encoder
+- Role-Based Access Control
 
 ## Database
-- PostgreSQL
-- Spring Data JPA
-- Hibernate ORM
+
+- PostgreSQL 17
 
 ## AI Integration
+
 - OpenRouter API
 - Large Language Models (LLMs)
+- Prompt-based product recommendation
 
 ## API Development
+
 - RESTful APIs
 - DTO Pattern
 - Global Exception Handling
-
-## API Documentation
 - Swagger / OpenAPI
-- JWT Authorization support in Swagger UI
 
-## DevOps
+## DevOps & Cloud
+
 - Docker
 - Docker Compose
+- AWS EC2
+- AWS Elastic IP
+- Nginx
+- Let's Encrypt
+- Certbot
+- HTTPS/TLS
 
-## Build Tool
+## Build Tools
+
 - Maven
-
-## Deployment
-- Railway
+- Vite / npm
 
 ---
 
-# 📂 Project Structure
+# ☁️ AWS Deployment Architecture
+
+The complete application is deployed on an **AWS EC2 instance**.
 
 ```text
-src
+                         Internet
+                            │
+                            │ HTTPS
+                            ▼
+                  ┌──────────────────┐
+                  │   AWS Elastic IP │
+                  │   13.205.5.209   │
+                  └────────┬─────────┘
+                           │
+                           ▼
+                  ┌──────────────────┐
+                  │      Nginx       │
+                  │ Reverse Proxy +  │
+                  │ Static Hosting   │
+                  └───────┬──────────┘
+                          │
+               ┌──────────┴──────────┐
+               │                     │
+               ▼                     ▼
+         React Frontend        /api/* Requests
+         Static Build                │
+                                     ▼
+                           ┌──────────────────┐
+                           │   Spring Boot    │
+                           │ Docker Container │
+                           │     :8080        │
+                           └────────┬─────────┘
+                                    │
+                       ┌────────────┴────────────┐
+                       │                         │
+                       ▼                         ▼
+              PostgreSQL Database         OpenRouter API
+               Docker Container             AI / LLM
+                    :5432
+```
+
+### Request Flow
+
+```text
+User
+  ↓
+HTTPS
+  ↓
+AWS Elastic IP
+  ↓
+Nginx
+  ├── /       → React Frontend
+  │
+  └── /api/*  → Spring Boot Backend
+                      ↓
+               PostgreSQL
+                      +
+               OpenRouter API
+```
+
+Nginx acts as the public entry point and reverse proxy for the application.
+
+---
+
+# 🔒 HTTPS Configuration
+
+The production application is secured using HTTPS.
+
+TLS certificates are issued using **Let's Encrypt** and managed through **Certbot**.
+
+```text
+Client
+   ↓ HTTPS
+Nginx
+   ↓
+Spring Boot
+```
+
+Certificate renewal is configured automatically through Certbot.
+
+---
+
+# 📂 Backend Project Structure
+
+```text
+src/main/java/com/lavanya/aiproductfinder
+│
 ├── controller
 ├── service
 │   └── impl
@@ -131,17 +250,28 @@ src
 
 # 🔐 User Roles
 
-## Guest User
-- Search products using AI
+## Guest
+
+Can:
+
+- Search for products using AI
 
 ## Registered User
+
+Can:
+
 - Search products
-- Save Wishlist
-- Access Search History
+- Compare products
+- Manage wishlist
+- Access search history
 
 ## Admin
-- All User Features
-- Access Analytics Dashboard
+
+Can:
+
+- Access user features
+- Access protected admin functionality
+- View platform analytics
 
 ---
 
@@ -183,38 +313,49 @@ DELETE /api/search-history/clear
 GET /api/admin/dashboard
 ```
 
----
+Protected endpoints require:
 
-# 📖 API Documentation
-
-Swagger UI is available after running the application:
-
+```http
+Authorization: Bearer <JWT_TOKEN>
 ```
-http://localhost:8080/swagger-ui/index.html
-```
-
-The API documentation supports JWT Bearer Authentication for testing protected endpoints.
 
 ---
 
-# 🐳 Running with Docker
+# 🐳 Docker Deployment
 
-## Prerequisites
+The backend and PostgreSQL database are containerized using Docker and orchestrated with Docker Compose.
 
-- Docker Desktop
+## Services
+
+```text
+docker-compose.yml
+│
+├── backend
+│   └── Spring Boot
+│
+└── postgres
+    └── PostgreSQL 17
+```
+
+PostgreSQL data is stored using a persistent Docker volume.
 
 ## Build and Start
 
 ```bash
-docker compose up --build
+docker compose up -d --build
 ```
 
-This command starts:
+## View Running Containers
 
-- Spring Boot Backend
-- PostgreSQL Database
+```bash
+docker compose ps
+```
 
-The backend automatically connects to PostgreSQL through Docker Compose's internal network.
+## View Backend Logs
+
+```bash
+docker logs ai-product-finder
+```
 
 ## Stop Containers
 
@@ -222,30 +363,133 @@ The backend automatically connects to PostgreSQL through Docker Compose's intern
 docker compose down
 ```
 
-Backend URL
+---
 
+# 💻 Running Locally
+
+## Prerequisites
+
+Install:
+
+- Java 17+
+- Maven
+- Docker
+- Node.js
+- npm
+
+Clone the backend:
+
+```bash
+git clone https://github.com/LavanyaSriChava/ai-product-finder-Backend.git
+cd ai-product-finder-Backend
 ```
+
+Create a `.env` file containing the required environment variables.
+
+Example:
+
+```env
+POSTGRES_DB=your_database
+POSTGRES_USER=your_username
+POSTGRES_PASSWORD=your_password
+OPENROUTER_API_KEY=your_openrouter_api_key
+```
+
+> Never commit `.env` files, database credentials, API keys, JWT secrets, or other sensitive credentials to GitHub.
+
+Start the application:
+
+```bash
+docker compose up -d --build
+```
+
+Backend:
+
+```text
 http://localhost:8080
 ```
 
-Swagger UI
+Swagger UI:
 
-```
+```text
 http://localhost:8080/swagger-ui/index.html
 ```
 
 ---
 
-# 🚀 Deployment
+# 🚀 Production Deployment
 
-### Frontend
-- Vercel
+| Component | Deployment |
+|---|---|
+| Frontend | AWS EC2 + Nginx |
+| Backend | AWS EC2 + Docker |
+| Database | PostgreSQL 17 + Docker |
+| Reverse Proxy | Nginx |
+| Public Networking | AWS Elastic IP |
+| HTTPS | Let's Encrypt + Certbot |
+| AI Service | OpenRouter API |
 
-### Backend
-- Railway
+### Production URL
 
-### Database
-- PostgreSQL
+```text
+https://13.205.5.209/
+```
+
+The production API is accessed through Nginx:
+
+```text
+https://13.205.5.209/api/*
+```
+
+---
+
+# 🛡️ Production Reliability
+
+The AWS deployment includes:
+
+- Persistent PostgreSQL Docker volume
+- Automatic Docker container restart policy
+- Nginx reverse proxy
+- HTTPS encryption
+- Automatic TLS certificate renewal
+- AWS Elastic IP for a stable public endpoint
+- Swap memory configured on the EC2 instance
+- Environment-based secret management
+
+---
+
+# 🔑 Environment Variables
+
+Sensitive configuration is provided through environment variables rather than being hardcoded into the source code.
+
+Examples include:
+
+```text
+POSTGRES_DB
+POSTGRES_USER
+POSTGRES_PASSWORD
+OPENROUTER_API_KEY
+```
+
+The `.env` file is excluded from Git using `.gitignore`.
+
+---
+
+# 📌 Deployment Highlights
+
+This project demonstrates:
+
+- Full-stack application development
+- REST API design
+- JWT authentication and authorization
+- AI/LLM API integration
+- Relational database persistence
+- Docker containerization
+- Multi-container orchestration
+- AWS EC2 deployment
+- Nginx reverse proxy configuration
+- HTTPS/TLS configuration
+- Production environment management
 
 ---
 
@@ -253,10 +497,10 @@ http://localhost:8080/swagger-ui/index.html
 
 **Lavanya Chava**
 
-GitHub:
+GitHub:  
 https://github.com/LavanyaSriChava
 
-LinkedIn:
+LinkedIn:  
 https://linkedin.com/in/lavanya-sri-chava-6b57a02a9
 
 ---
