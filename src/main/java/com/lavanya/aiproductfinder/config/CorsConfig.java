@@ -19,7 +19,7 @@ public class CorsConfig {
 
         config.setAllowedOrigins(
                 List.of(
-                        "https://ai-product-finder-frontend.vercel.app"
+                       "http://localhost:5173"
                 )
         );
 

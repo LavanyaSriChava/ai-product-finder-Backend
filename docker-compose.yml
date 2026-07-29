@@ -4,7 +4,7 @@ services:
 
   postgres:
 
-    image: postgres:latest
+    image: postgres:17
 
     container_name: postgres-db
 
@@ -24,8 +24,8 @@ services:
 
   backend:
 
-    build: .
-
+    build: . 
+    restart: always
     container_name: ai-product-finder
 
     depends_on:
